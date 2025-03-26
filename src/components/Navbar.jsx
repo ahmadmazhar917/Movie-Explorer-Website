@@ -17,10 +17,14 @@ const Navbar = () => {
       <div>
         <ul className="flex gap-4">
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" className="hover:text-purple-900">
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/favorites">Favorites</Link>
+            <Link to="/favorites" className="hover:text-purple-900">
+              Favorites
+            </Link>
           </li>
         </ul>
       </div>

@@ -8,8 +8,6 @@ import Movies from "./components/Movies";
 function App() {
   return (
     <Container>
-      <Navbar />
-      <Movies />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/favorites" element={<Favorites />} />
