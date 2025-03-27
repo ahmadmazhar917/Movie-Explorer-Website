@@ -1,18 +1,19 @@
-import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Container } from "@mui/material";
-import Movies from "./components/Movies";
+import { FavoriteContextProvider } from "./store/favorites-context";
 
 function App() {
   return (
-    <Container>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/favorites" element={<Favorites />} />
-      </Routes>
-    </Container>
+    <FavoriteContextProvider>
+      <Container>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/favorites" element={<Favorites />} />
+        </Routes>
+      </Container>
+    </FavoriteContextProvider>
   );
 }
 

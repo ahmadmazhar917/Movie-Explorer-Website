@@ -1,7 +1,21 @@
-import React from "react";
-import { ImageListItem, ImageListItemBar } from "@mui/material";
+import React, { use } from "react";
+import { ImageListItem, ImageListItemBar, IconButton } from "@mui/material";
+import { useState } from "react";
+
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { FavoriteContext } from "../store/favorites-context";
 
 const MovieItem = ({ movieItemData }) => {
+  const { addItemToFavorites, removeItemToFavorites } = use(FavoriteContext);
+
+  const [addToFavorite, setAddToFavorite] = useState(movieItemData.favorites);
+
+  function handleClickToFavorite() {
+    setAddToFavorite(!addToFavorite);
+    movieItemData.favorites = !movieItemData.favorites;
+  }
+
   return (
     <ImageListItem>
       <img
@@ -23,6 +37,23 @@ const MovieItem = ({ movieItemData }) => {
             fontSize: "1rem",
           },
         }}
+        actionPosition="right"
+        actionIcon={
+          <IconButton
+            onClick={handleClickToFavorite}
+            sx={{ color: "rgb(255, 0, 0)" }}
+          >
+            {addToFavorite === false ? (
+              <FavoriteBorderOutlinedIcon
+                onClick={() => addItemToFavorites(movieItemData)}
+              />
+            ) : (
+              <FavoriteIcon
+                onClick={() => removeItemToFavorites(movieItemData)}
+              />
+            )}
+          </IconButton>
+        }
       ></ImageListItemBar>
     </ImageListItem>
   );

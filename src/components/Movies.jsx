@@ -1,16 +1,11 @@
 import { useEffect, useState } from "react";
 import ErrorComponent from "./ErrorComponent";
-import MovieItem from "./MovieItem";
-
-import { ImageList, Pagination, Stack } from "@mui/material";
-
-const itemsPerPage = 10;
+import MoviesWrapper from "./MoviesWrapper";
 
 const Movies = () => {
   const [data, setData] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [error, setError] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     async function loadData() {
@@ -37,6 +32,7 @@ const Movies = () => {
 
             for (let movie of dt.Search) {
               movie.id = counter;
+              movie.favorites = false;
               counter++;
             }
 
@@ -55,34 +51,12 @@ const Movies = () => {
     loadData();
   }, []);
 
-  const totalPages = Math.ceil(data.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedData = data.slice(startIndex, startIndex + itemsPerPage);
-
-  const handlePageChange = (event, value) => {
-    setCurrentPage(value);
-  };
-
   return (
     <>
       {isFetching && (
         <p className="text-center mt-10">Fetching movies data...</p>
       )}
-      <ImageList gap={10} cols={2} rowHeight={600} sx={{ marginTop: "5rem" }}>
-        {paginatedData.map((movie) => (
-          <MovieItem key={movie.id} movieItemData={movie} />
-        ))}
-      </ImageList>
-      <Stack spacing={2} my={4} flexDirection="row" justifyContent="center">
-        <Pagination
-          count={totalPages}
-          page={currentPage}
-          onChange={handlePageChange}
-          showFirstButton
-          showLastButton
-          color="secondary"
-        />
-      </Stack>
+      {!isFetching && <MoviesWrapper data={data} />}
       {error && <ErrorComponent title="An Error Occured" message={error} />}
     </>
   );
