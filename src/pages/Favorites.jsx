@@ -2,12 +2,7 @@ import FavoriteMovies from "../components/FavoriteMovies";
 import Navbar from "../components/Navbar";
 
 const Favorites = () => {
-  return (
-    <>
-      <Navbar></Navbar>
-      <FavoriteMovies />
-    </>
-  );
+  return <FavoriteMovies />;
 };
 
 export default Favorites;

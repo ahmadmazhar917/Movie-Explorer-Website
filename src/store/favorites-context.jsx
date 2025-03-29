@@ -7,20 +7,22 @@ export const FavoriteContext = createContext({
 });
 
 export function FavoriteContextProvider({ children }) {
-  const [addToFavoriteItems, setAddToFavoriteItems] = useState([]);
+  const [addToFavoriteItems, setAddToFavoriteItems] = useState(() => {
+    const storedFavorites = localStorage.getItem("favorites");
+    return storedFavorites ? JSON.parse(storedFavorites) : [];
+  });
 
-  // useEffect(() => {
-  //   const data = localStorage.getItem("movies");
-  //   if (data) {
-  //     setAddToFavoriteItems(data);
-  //   }
-  // }, []);
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(addToFavoriteItems));
+  }, [addToFavoriteItems]);
 
   function addItemToFavorites(movieData) {
-    let updatedItems;
     setAddToFavoriteItems((prevVal) => {
-      updatedItems = [...prevVal, movieData];
-      return updatedItems;
+      let movieItemIndex = prevVal.findIndex((val) => val.id === movieData.id);
+      if (movieItemIndex === -1) {
+        return [...prevVal, movieData];
+      }
+      return [...prevVal];
     });
   }
 
@@ -30,7 +32,6 @@ export function FavoriteContextProvider({ children }) {
       updatedFavoriteItems = prevVal.filter((val) => val.id !== movieData.id);
       return updatedFavoriteItems;
     });
-    // localStorage.setItem("movies", updatedFavoriteItems);
   }
 
   const contextValue = {
