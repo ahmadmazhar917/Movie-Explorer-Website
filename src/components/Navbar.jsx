@@ -2,8 +2,12 @@ import Logo from "../assets/logo.png";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   function searchAction(formData) {
     const movieName = formData.get("searchedMovieName");
+    if (movieName.trim() !== "") {
+      navigate(`/searchpage?search=${movieName}`);
+    }
   }
 
   return (

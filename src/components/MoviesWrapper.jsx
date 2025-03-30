@@ -3,7 +3,7 @@ import MovieItem from "./MovieItem";
 import { useState } from "react";
 
 const itemsPerPage = 10;
-const MoviesWrapper = ({ data }) => {
+const MoviesWrapper = ({ data, showFavoritesIcon = true }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = Math.ceil(data.length / itemsPerPage);
@@ -17,7 +17,11 @@ const MoviesWrapper = ({ data }) => {
     <>
       <ImageList gap={10} cols={2} rowHeight={600} sx={{ marginTop: "5rem" }}>
         {paginatedData.map((movie) => (
-          <MovieItem key={movie.id} movieItemData={movie} />
+          <MovieItem
+            key={movie.id}
+            movieItemData={movie}
+            showFavoritesIcon={showFavoritesIcon}
+          />
         ))}
       </ImageList>
       {data.length > 10 && (

@@ -1,12 +1,14 @@
 import React, { use } from "react";
 import { ImageListItem, ImageListItemBar, IconButton } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { FavoriteContext } from "../store/favorites-context";
 
-const MovieItem = ({ movieItemData }) => {
+const MovieItem = ({ movieItemData, showFavoritesIcon }) => {
+  const navigate = useNavigate();
   const { addItemToFavorites, removeItemToFavorites } = use(FavoriteContext);
 
   const [addToFavorite, setAddToFavorite] = useState(movieItemData.favorites);
@@ -16,8 +18,15 @@ const MovieItem = ({ movieItemData }) => {
     movieItemData.favorites = !movieItemData.favorites;
   }
 
+  function handleClickForMovieDetails(clickedMovieItem) {
+    const movieID = clickedMovieItem.imdbID;
+    if (movieID.trim() !== "") {
+      navigate(`/moviedetails?id=${movieID}`);
+    }
+  }
+
   return (
-    <ImageListItem>
+    <ImageListItem onClick={() => handleClickForMovieDetails(movieItemData)}>
       <img
         src={movieItemData.Poster}
         alt={movieItemData.Title}
@@ -39,20 +48,22 @@ const MovieItem = ({ movieItemData }) => {
         }}
         actionPosition="right"
         actionIcon={
-          <IconButton
-            onClick={handleClickToFavorite}
-            sx={{ color: "rgb(255, 0, 0)" }}
-          >
-            {addToFavorite === false ? (
-              <FavoriteBorderOutlinedIcon
-                onClick={() => addItemToFavorites(movieItemData)}
-              />
-            ) : (
-              <FavoriteIcon
-                onClick={() => removeItemToFavorites(movieItemData)}
-              />
-            )}
-          </IconButton>
+          showFavoritesIcon && (
+            <IconButton
+              onClick={handleClickToFavorite}
+              sx={{ color: "rgb(255, 0, 0)" }}
+            >
+              {addToFavorite === false ? (
+                <FavoriteBorderOutlinedIcon
+                  onClick={() => addItemToFavorites(movieItemData)}
+                />
+              ) : (
+                <FavoriteIcon
+                  onClick={() => removeItemToFavorites(movieItemData)}
+                />
+              )}
+            </IconButton>
+          )
         }
       ></ImageListItemBar>
     </ImageListItem>
