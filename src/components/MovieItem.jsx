@@ -21,7 +21,7 @@ const MovieItem = ({ movieItemData, showFavoritesIcon }) => {
   function handleClickForMovieDetails(clickedMovieItem) {
     const movieID = clickedMovieItem.imdbID;
     if (movieID.trim() !== "") {
-      navigate(`/moviedetails?id=${movieID}`);
+      navigate(`/moviedetails/${movieID}`);
     }
   }
 

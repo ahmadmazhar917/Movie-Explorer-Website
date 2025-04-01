@@ -1,18 +1,15 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import ErrorComponent from "../components/ErrorComponent";
 
 const MovieDetails = () => {
   const { id } = useParams();
   const [searchedMovieDetails, setSearchedMovieDetails] = useState(null);
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    if (id) {
-      fetchMovies(id);
-    }
-  }, [id]);
+  const [isFetching, setIsFetching] = useState(false);
 
   const fetchMovies = async (id) => {
+    setIsFetching(true);
     try {
       const response = await fetch(
         `http://www.omdbapi.com/?apikey=84c484f2&i=${id}`
@@ -25,13 +22,30 @@ const MovieDetails = () => {
         setSearchedMovieDetails(null);
       }
     } catch (error) {
-      setError(error.message || "Unable to fetch searched movie.");
+      setError(error.message || "Unable to fetch movie details.");
     }
+    setIsFetching(false);
   };
+
+  useEffect(() => {
+    if (id) {
+      fetchMovies(id);
+    }
+  }, [id]);
+
+  if (error) {
+    return <ErrorComponent title="An Error Occurred" message={error} />;
+  }
+
+  if (isFetching) {
+    return (
+      <p className="text-center mt-5 h-screen">Fetching movie details...</p>
+    );
+  }
 
   return (
     searchedMovieDetails && (
-      <div className="text-center">
+      <div className="flex flex-col justify-center items-center mt-5">
         <h2>{searchedMovieDetails.Title}</h2>
         <img
           src={searchedMovieDetails.Poster}
@@ -47,7 +61,7 @@ const MovieDetails = () => {
         <p>
           <strong>Director: </strong> {searchedMovieDetails.Director}
         </p>
-        <p>
+        <p className="text-center">
           <strong>Plot: </strong> {searchedMovieDetails.Plot}
         </p>
       </div>

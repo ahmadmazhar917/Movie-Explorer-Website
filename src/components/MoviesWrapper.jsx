@@ -15,7 +15,12 @@ const MoviesWrapper = ({ data, showFavoritesIcon = true }) => {
   };
   return (
     <>
-      <ImageList gap={10} cols={2} rowHeight={600} sx={{ marginTop: "5rem" }}>
+      <ImageList
+        gap={10}
+        cols={2}
+        rowHeight={600}
+        sx={{ marginTop: "5rem", height: "100vh" }}
+      >
         {paginatedData.map((movie) => (
           <MovieItem
             key={movie.id}
