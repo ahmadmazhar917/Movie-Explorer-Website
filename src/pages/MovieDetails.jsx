@@ -1,37 +1,15 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
 import ErrorComponent from "../components/ErrorComponent";
+import { useSearch } from "../hooks/useSearch";
+import { fetchMovieDetails } from "../http";
 
 const MovieDetails = () => {
   const { id } = useParams();
-  const [searchedMovieDetails, setSearchedMovieDetails] = useState(null);
-  const [error, setError] = useState("");
-  const [isFetching, setIsFetching] = useState(false);
-
-  const fetchMovies = async (id) => {
-    setIsFetching(true);
-    try {
-      const response = await fetch(
-        `http://www.omdbapi.com/?apikey=84c484f2&i=${id}`
-      );
-      const data = await response.json();
-
-      if (data) {
-        setSearchedMovieDetails(data);
-      } else {
-        setSearchedMovieDetails(null);
-      }
-    } catch (error) {
-      setError(error.message || "Unable to fetch movie details.");
-    }
-    setIsFetching(false);
-  };
-
-  useEffect(() => {
-    if (id) {
-      fetchMovies(id);
-    }
-  }, [id]);
+  const {
+    data: searchedMovieDetails,
+    isFetching,
+    error,
+  } = useSearch(fetchMovieDetails, null, id);
 
   if (error) {
     return <ErrorComponent title="An Error Occurred" message={error} />;

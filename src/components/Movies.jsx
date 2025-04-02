@@ -6,13 +6,15 @@ const Movies = () => {
   const { data, isFetching, error } = useFetch(loadMoviesData, []);
 
   return (
-    <>
+    <div className="h-screen">
+      {!isFetching && error && (
+        <ErrorComponent title="An Error Occured" message={error} />
+      )}
       {isFetching && (
         <p className="text-center mt-10 h-screen">Fetching movies data...</p>
       )}
-      {!isFetching && <MoviesWrapper data={data} />}
-      {error && <ErrorComponent title="An Error Occured" message={error} />}
-    </>
+      {!isFetching && !error && <MoviesWrapper data={data} />}
+    </div>
   );
 };
 
