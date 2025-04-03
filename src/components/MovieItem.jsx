@@ -26,12 +26,13 @@ const MovieItem = ({ movieItemData, showFavoritesIcon }) => {
   }
 
   return (
-    <ImageListItem onClick={() => handleClickForMovieDetails(movieItemData)}>
+    <ImageListItem>
       <img
         src={movieItemData.Poster}
         alt={movieItemData.Title}
         loading="lazy"
         style={{ width: "100%", height: "100%" }}
+        onClick={() => handleClickForMovieDetails(movieItemData)}
       />
       <ImageListItemBar
         title={movieItemData.Title}

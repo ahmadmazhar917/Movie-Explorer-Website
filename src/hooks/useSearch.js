@@ -13,9 +13,7 @@ export function useSearch(searchFn, initialValue, params) {
           const data = await searchFn(params);
           setData(data);
         } catch (error) {
-          setError({
-            message: error.message || "Failed to fetch data.",
-          });
+          setError("Failed to fetch data.");
         }
         setIsFetching(false);
       }

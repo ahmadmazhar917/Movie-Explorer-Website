@@ -16,7 +16,11 @@ const SearchPage = () => {
   } = useSearch(searchMovies, [], query);
 
   if (error) {
-    return <ErrorComponent title="An Error Occurred" message={error} />;
+    return (
+      <div className="h-screen">
+        <ErrorComponent title="An Error Occurred" message={error} />
+      </div>
+    );
   }
 
   if (isFetching) {

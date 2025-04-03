@@ -12,7 +12,11 @@ const MovieDetails = () => {
   } = useSearch(fetchMovieDetails, null, id);
 
   if (error) {
-    return <ErrorComponent title="An Error Occurred" message={error} />;
+    return (
+      <div className="h-screen">
+        <ErrorComponent title="An Error Occurred" message={error} />
+      </div>
+    );
   }
 
   if (isFetching) {
@@ -22,28 +26,30 @@ const MovieDetails = () => {
   }
 
   return (
-    searchedMovieDetails && (
-      <div className="flex flex-col justify-center items-center mt-5">
-        <h2>{searchedMovieDetails.Title}</h2>
-        <img
-          src={searchedMovieDetails.Poster}
-          alt={searchedMovieDetails.Title}
-          width={200}
-        />
-        <p>
-          <strong>Year: </strong> {searchedMovieDetails.Year}
-        </p>
-        <p>
-          <strong>Genre: </strong> {searchedMovieDetails.Genre}
-        </p>
-        <p>
-          <strong>Director: </strong> {searchedMovieDetails.Director}
-        </p>
-        <p className="text-center">
-          <strong>Plot: </strong> {searchedMovieDetails.Plot}
-        </p>
-      </div>
-    )
+    <div className="h-screen">
+      {searchedMovieDetails && (
+        <div className="flex flex-col justify-center items-center mt-5">
+          <h2>{searchedMovieDetails.Title}</h2>
+          <img
+            src={searchedMovieDetails.Poster}
+            alt={searchedMovieDetails.Title}
+            width={200}
+          />
+          <p>
+            <strong>Year: </strong> {searchedMovieDetails.Year}
+          </p>
+          <p>
+            <strong>Genre: </strong> {searchedMovieDetails.Genre}
+          </p>
+          <p>
+            <strong>Director: </strong> {searchedMovieDetails.Director}
+          </p>
+          <p className="text-center">
+            <strong>Plot: </strong> {searchedMovieDetails.Plot}
+          </p>
+        </div>
+      )}
+    </div>
   );
 };
 
