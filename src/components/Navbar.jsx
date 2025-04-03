@@ -4,8 +4,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
 import {
-  AppBar,
-  Toolbar,
   IconButton,
   Drawer,
   List,
@@ -34,24 +32,23 @@ const Navbar = () => {
           width={50}
           className="rounded-xl"
         />
-        <p>Movie Explorer</p>
+        <p className="text-md">Movie Explorer</p>
       </div>
-      <IconButton
-        sx={{
-          display: { xs: "block", sm: "block", md: "none" },
-          color: "purple",
-        }}
-        onClick={() => setIsDrawerOpen(true)}
-      >
-        <MenuIcon fontSize="large" />
-      </IconButton>
+      <div className="md:hidden block">
+        <IconButton
+          onClick={() => setIsDrawerOpen(true)}
+          sx={{ color: "purple" }}
+        >
+          <MenuIcon fontSize="large" />
+        </IconButton>
+      </div>
       <div className="hidden md:block">
         <ul className="flex gap-4">
           <li>
             <NavLink
               to="/"
               className={({ isActive }) =>
-                `hover:text-purple-900 p-2 ${
+                `hover:text-purple-900 p-2 text-md ${
                   isActive ? "border-b-2 border-purple-900 font-bold" : ""
                 }`
               }
@@ -63,7 +60,7 @@ const Navbar = () => {
             <NavLink
               to="/favorites"
               className={({ isActive }) =>
-                `hover:text-purple-900 p-2 ${
+                `hover:text-purple-900 p-2 text-md ${
                   isActive ? "border-b-2 border-purple-900 font-bold" : ""
                 }`
               }
@@ -98,7 +95,7 @@ const Navbar = () => {
           </IconButton>
           <List>
             <ListItem
-              button
+              disablePadding
               component={NavLink}
               to="/"
               onClick={() => setIsDrawerOpen(false)}
@@ -106,7 +103,7 @@ const Navbar = () => {
               <ListItemText primary="Home" />
             </ListItem>
             <ListItem
-              button
+              disablePadding
               component={NavLink}
               to="/favorites"
               onClick={() => setIsDrawerOpen(false)}

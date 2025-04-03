@@ -1,6 +1,7 @@
 import { ImageList, Stack, Pagination } from "@mui/material";
 import MovieItem from "./MovieItem";
 import { useState } from "react";
+import { useTheme, useMediaQuery } from "@mui/material";
 
 const itemsPerPage = 10;
 const MoviesWrapper = ({ data, showFavoritesIcon = true }) => {
@@ -13,13 +14,29 @@ const MoviesWrapper = ({ data, showFavoritesIcon = true }) => {
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
+
+  const theme = useTheme();
+  const isXs = useMediaQuery(theme.breakpoints.down("sm"));
+  const isSm = useMediaQuery(theme.breakpoints.between("sm", "md"));
+  const isMd = useMediaQuery(theme.breakpoints.between("md", "lg"));
+  const isLg = useMediaQuery(theme.breakpoints.up("lg"));
+
+  const getRowHeight = () => {
+    if (isXs) return 400; // Phones
+    if (isSm) return 500; // Tablets
+    if (isMd) return 600; // Small laptops
+    return 700; // Large screens (default)
+  };
   return (
     <>
       <ImageList
         gap={10}
         cols={2}
-        rowHeight={600}
-        sx={{ marginTop: "5rem", height: "100vh" }}
+        rowHeight={getRowHeight()}
+        sx={{
+          marginTop: "5rem",
+          height: "100vh",
+        }}
       >
         {paginatedData.map((movie) => (
           <MovieItem
