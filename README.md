@@ -10,4 +10,9 @@
 - Utilized local storage to preserve users' favorite movies.
 - Designed a responsive user interface with Tailwind CSS and Material UI.
 
+## Live Demo
+
+Check out the live version of the Movie Explorer website:  
+🔗 [Movie Explorer](https://filmexplorerwebsite.netlify.app/)
+
 <img src='/src/assets/homepage.png'>
