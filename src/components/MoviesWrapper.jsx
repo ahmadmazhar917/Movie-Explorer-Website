@@ -22,10 +22,10 @@ const MoviesWrapper = ({ data, showFavoritesIcon = true }) => {
   const isLg = useMediaQuery(theme.breakpoints.up("lg"));
 
   const getRowHeight = () => {
-    if (isXs) return 400; // Phones
-    if (isSm) return 500; // Tablets
-    if (isMd) return 600; // Small laptops
-    return 700; // Large screens (default)
+    if (isXs) return 400;
+    if (isSm) return 500;
+    if (isMd) return 600;
+    return 700;
   };
   return (
     <>

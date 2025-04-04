@@ -1,5 +1,5 @@
 export async function loadMoviesData() {
-  const baseUrl = "http://www.omdbapi.com/?apikey=84c484f2";
+  const baseUrl = "https://www.omdbapi.com/?apikey=84c484f2";
   const movieNamesList = [
     "joker",
     "superman",
@@ -31,7 +31,7 @@ export async function loadMoviesData() {
 
 export async function searchMovies(query) {
   const response = await fetch(
-    `http://www.omdbapi.com/?apikey=84c484f2&s=${query}`
+    `https://www.omdbapi.com/?apikey=84c484f2&s=${query}`
   );
   const data = await response.json();
 
@@ -48,7 +48,7 @@ export async function searchMovies(query) {
 
 export async function fetchMovieDetails(id) {
   const response = await fetch(
-    `http://www.omdbapi.com/?apikey=84c484f2&i=${id}`
+    `https://www.omdbapi.com/?apikey=84c484f2&i=${id}`
   );
   const data = await response.json();
 
