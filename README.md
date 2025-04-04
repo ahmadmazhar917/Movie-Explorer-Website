@@ -1,12 +1,13 @@
-# React + Vite
+# Movie Explorer Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- Built a platform for users to:
+  - Add movies to their favorites
+  - Look up movie details
+  - Search for favorite movies
+- Used React.js for development.
+- Integrated the OMDB API to fetch movie data.
+- Implemented pagination to limit the number of movies displayed per page.
+- Utilized local storage to preserve users' favorite movies.
+- Designed a responsive user interface with Tailwind CSS and Material UI.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+<img src='/src/assets/homepage.png'>
